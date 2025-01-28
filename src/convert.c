@@ -51,10 +51,8 @@ int otherToDecimal(int radix, char *other)
 
 char *decimalToOther(int dnumber, int radix)
 {
-  // Using formula Log_B(N) = Log(N) / Log(B) to calculate the number of digits
-  // required to represent number dnumber in base radix
-
-  int numberOfDigits, remainder;
+  int remainder;
+  int numberOfDigits = 0;
   int buffer = dnumber;
 
   // Special case for 0
@@ -64,7 +62,11 @@ char *decimalToOther(int dnumber, int radix)
   }
   else
   {
-    numberOfDigits = (int)((log(dnumber) / log(radix)) + 1);
+    do
+    {
+      dnumber = dnumber / radix;
+      numberOfDigits++;
+    } while (dnumber > 0);
   }
 
   // Dynamically allocating memory, factoring in space for null
