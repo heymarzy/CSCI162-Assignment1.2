@@ -59,6 +59,8 @@ int main()
       printf("%c", convertedDecimal[i]);
     }
 
+    printf("%s", "\n");
+
     // No longer needed after printing
     free(convertedDecimal);
 
@@ -81,11 +83,11 @@ int main()
     int convertedOther = otherToDecimal(userRadix, otherNumber);
     if (convertedOther)
     {
-      printf("\nYour number converted to decimal is: %d", convertedOther);
+      printf("\nYour number converted to decimal is: %d\n", convertedOther);
     }
     else
     {
-      printf("Sorry, there is no valid conversion with %s and %d.", otherNumber,
+      printf("Sorry, there is no valid conversion with %s and %d.\n", otherNumber,
              userRadix);
     }
 

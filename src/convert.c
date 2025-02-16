@@ -4,6 +4,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 // definition of all the functions declared in convert.h and called in main.c
 int otherToDecimal(int radix, char *other)
@@ -59,11 +60,12 @@ char *decimalToOther(int dnumber, int radix)
   }
   else
   {
+    int temp = dnumber;
     do
     {
-      dnumber = dnumber / radix;
+      temp = temp / radix;
       numberOfDigits++;
-    } while (dnumber > 0);
+    } while (temp > 0);
   }
 
   // Dynamically allocating memory, factoring in space for null
@@ -72,7 +74,8 @@ char *decimalToOther(int dnumber, int radix)
 
   if (converted == NULL)
   {
-    printf("Memory allocation failed.");
+    printf("%s", "Memory allocation failed.");
+    return NULL;
   }
   else
   {
@@ -116,7 +119,7 @@ char *reverse(char *other)
 
   if (reversed == NULL)
   {
-    printf("Memory allocation failed.");
+    printf("%s", "Memory allocation failed.");
   }
 
   else
@@ -128,9 +131,8 @@ char *reverse(char *other)
 
     // null-terminating the c string
     reversed[length] = '\0';
-
-    return reversed;
   }
+  return reversed;
 }
 
 int isRadix(char *other, int radix)
