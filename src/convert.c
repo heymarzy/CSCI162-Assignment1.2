@@ -1,6 +1,3 @@
-#ifndef CONVERT_FUNCS
-#define CONVERT_FUNCS
-
 // preprocessor directives
 #include "../include/convert.h"
 
@@ -73,36 +70,43 @@ char *decimalToOther(int dnumber, int radix)
   // terminator
   char *converted = malloc((numberOfDigits + 1) * sizeof(char));
 
-  // Special case for 0
-  if (dnumber == 0)
+  if (converted == NULL)
   {
-    converted[0] = '0';
+    printf("Memory allocation failed.");
   }
   else
   {
-    for (int i = 0; buffer > 0; i++)
+    // Special case for 0
+    if (dnumber == 0)
     {
-      remainder = buffer % radix;
-      buffer = buffer / radix;
+      converted[0] = '0';
+    }
+    else
+    {
+      for (int i = 0; buffer > 0; i++)
+      {
+        remainder = buffer % radix;
+        buffer = buffer / radix;
 
-      // Using the ASCII table to map digits to chars
-      if (remainder < 10)
-      {
-        converted[i] = '0' + remainder;
-      }
-      else
-      {
-        converted[i] = 'A' + (remainder - 10);
+        // Using the ASCII table to map digits to chars
+        if (remainder < 10)
+        {
+          converted[i] = '0' + remainder;
+        }
+        else
+        {
+          converted[i] = 'A' + (remainder - 10);
+        }
       }
     }
+    converted[numberOfDigits] = '\0';
+
+    char *result = reverse(converted);
+    // no longer need memory for converted
+    free(converted);
+
+    return result;
   }
-  converted[numberOfDigits] = '\0';
-
-  char *result = reverse(converted);
-  // no longer need memory for converted
-  free(converted);
-
-  return result;
 }
 
 char *reverse(char *other)
@@ -110,15 +114,23 @@ char *reverse(char *other)
   int length = strlen(other);
   char *reversed = malloc((length + 1) * sizeof(char));
 
-  for (int i = 0; i < length; i++)
+  if (reversed == NULL)
   {
-    reversed[i] = other[length - i - 1];
+    printf("Memory allocation failed.");
   }
 
-  // null-terminating the c string
-  reversed[length] = '\0';
+  else
+  {
+    for (int i = 0; i < length; i++)
+    {
+      reversed[i] = other[length - i - 1];
+    }
 
-  return reversed;
+    // null-terminating the c string
+    reversed[length] = '\0';
+
+    return reversed;
+  }
 }
 
 int isRadix(char *other, int radix)
@@ -148,5 +160,3 @@ int isRadix(char *other, int radix)
   }
   return 1;
 }
-
-#endif

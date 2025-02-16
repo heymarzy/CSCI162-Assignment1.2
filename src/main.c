@@ -5,9 +5,6 @@ any other radix chosen by the user
 Emphasis on binary decimal octal and hexadecimal
 @ author Kawal Jeet
 */
-#ifndef CONVERT_FUNCS_MAIN
-#define CONVERT_FUNCS_MAIN
-
 // preprocessor directives here
 // includes and defines
 #include "../include/convert.h"
@@ -97,5 +94,3 @@ int main()
 
   return 0;
 }
-
-#endif
